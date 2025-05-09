@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PERT Task Estimator</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 2rem auto; }
+        input[type="text"], input[type="number"] {
+            padding: 0.5rem; width: 100%; margin-top: 5px;
+        }
+        button { padding: 0.5rem 1rem; margin-top: 1rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <h1>📊 Task Estimator with PERT</h1>
+
+    <p>
+        Source code <a href="https://github.com/MayMeow/pert-task-estimator">maymeow/pert-task-estimator</a>
+    </p>
+
+    <div>
+        <label>Subtask:</label>
+        <input type="text" id="subtask" placeholder="e.g. Connect API">
+
+        <label>Optimistic Time (O):</label>
+        <input type="number" id="opt" step="0.1" placeholder="e.g. 1">
+
+        <label>Most Likely Time (M):</label>
+        <input type="number" id="ml" step="0.1" placeholder="e.g. 2">
+
+        <label>Pessimistic Time (P):</label>
+        <input type="number" id="pes" step="0.1" placeholder="e.g. 3">
+
+        <button onclick="addPERTTask()">Add Subtask</button>
+    </div>
+
+    <table id="pertTable" style="display:none;">
+        <thead>
+            <tr>
+            <th>Subtask</th><th>O</th><th>M</th><th>P</th><th>Estimate (hrs)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div id="summary" style="margin-top: 1rem; display:none;">
+        <label>Buffer (%):</label>
+        <input type="number" id="buffer" value="20" min="0" max="100" onchange="updatePERTSummary()"> %
+
+        <p><strong>Total Estimate:</strong> <span id="pertTotal">0</span> hours</p>
+        <p><strong>Final (with buffer):</strong> <span id="pertFinal">0</span> hours</p>
+    </div>
+
+    <script src="./app.js"></script>
+
+</body>
+</html>
